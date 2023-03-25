@@ -151,5 +151,4 @@ stats_btn.place(x=145, y=520)
 settings_btn = Button(root, text="Settings", height=7, width=20, command=change_to_settings)
 settings_btn.place(x=290, y=520)
 
-
 root.mainloop()
