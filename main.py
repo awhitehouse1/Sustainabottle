@@ -11,6 +11,9 @@ from kivy.uix.widget import Widget
 class MainWidget(Widget):
     pass
 
+class TextInput(Widget):
+    pass
+
 class WaterApp(App):
     pass
 
