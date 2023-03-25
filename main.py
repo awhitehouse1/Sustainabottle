@@ -25,7 +25,7 @@ root.title("Water App")
 main_menu = Frame(root)
 stats = Frame(root)
 settings = Frame(root)
-display_bottles_saved = LabelFrame(root, bg="green", borderwidth=2, relief="solid")
+display_bottles_saved = Frame(root, bg="light green", borderwidth=2, relief="solid")
 
 # Define a function for switching the frames
 def change_to_main():
@@ -49,12 +49,12 @@ def change_to_settings():
 # Add a heading logo in the frames
 global total_saved
 total_saved = 0
-plastic_saved_label = Label(main_menu, text="Total Saved:", foreground="blue", borderwidth=2, relief="solid", padx=10, pady=10)
-plastic_saved_number = Label(main_menu, text=str(total_saved))
-bottles_label = Label(main_menu, text="bottles")
+plastic_saved_label = Label(display_bottles_saved, text="Total Saved:", bg="light green")
+plastic_saved_number = Label(display_bottles_saved, text=str(total_saved),bg="light green" )
+bottles_label = Label(display_bottles_saved, text="bottles",bg="light green" )
 plastic_saved_label.pack()
-plastic_saved_number.pack()
-bottles_label.pack()
+bottles_label.pack(side=RIGHT)
+plastic_saved_number.pack(side=RIGHT)
 
 # MAIN MENU
 # Add the image
@@ -131,6 +131,7 @@ def validate_water_entry():
 button = Button(main_menu, text="Enter", command=validate_water_entry)  # Can be repurposed into
 button.pack()
 
+display_bottles_saved.pack()
 main_menu.pack(fill='both', expand=1)
 
 label2 = Label(stats, text="in stats", foreground="blue")
