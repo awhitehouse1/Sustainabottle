@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import *
+from PIL import Image,ImageTk
 
 # Create the main window
 root = tk.Tk()
@@ -9,6 +11,16 @@ root.title("Four Buttons")
 # Set the window size
 root.geometry("432x768")
 root.resizable("False", "False")
+
+#Add the image
+img = Image.open("bottle.jpg")
+img = img.resize((50,50), Image.ANTIALIAS)
+img = ImageTk.PhotoImage(img)
+label_image = tk.Label(image=img)
+label_image.image = img
+label_image.place(x=216,y=300)
+
+
 
 button_frame = tk.Frame(root)
 button_frame.pack(side=tk.BOTTOM, padx=5, pady=5)
