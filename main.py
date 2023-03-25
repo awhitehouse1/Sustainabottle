@@ -45,6 +45,7 @@ def donothing():  # Placeholder Function
     x = 1
 
 ####
+
 askTaskName = tk.Label(text="How much water did you drink since your last entry?", bg="white")
 entry = tk.Entry()
 
@@ -70,7 +71,7 @@ clicked.set("oz")
 drop = OptionMenu(root, clicked, *options)
 drop.pack()
 
-# Create button, it will change label text
+# Create button
 button = Button(root, text="Enter", command=donothing()).pack() #Can be repurposed into
 ####
 
