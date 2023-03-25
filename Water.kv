@@ -2,10 +2,16 @@ BoxLayoutExample:
 
 <BoxLayoutExample>:
     orientation: "vertical"
-    Button:
-        text: "A"
+    TextInput:
+        id: my_text_input
+        multiline: False
         size_hint: .2, 1
-        pos_hint: {"center_x":.5}
+        multiline: False
+        on_text_validate: root.on_text_validate(self)
+
+    Label:
+        text: root.text_input_str
+
     Button:
         text: "B"
         size_hint: 1, 1
