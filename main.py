@@ -86,18 +86,15 @@ def display_total_entries(value, measurement):
     global allDrinkEntries
     drinkEntry = [None] * 3
     if measurement == 'oz':
-        print("it's oz")
         drinkEntry[0] = str(int(value))
         drinkEntry[1] = str(int(value) * 29.57353) #milliliters = fluid ounces × 29.57353
         drinkEntry[2] = str(int(value)/34) #L = oz/33.814
 
     elif measurement == 'mL':
-        print("it's mL")
         drinkEntry[0] = str(int(value)/29.57353) #oz = mL/29.57353
         drinkEntry[1] = str(int(value))
         drinkEntry[2] = str(int(value)/1000) #L = mL/1000
     else:
-        print("it's L")
         drinkEntry[0] = str(int(value) * 33.814) #oz = L * 33.814
         drinkEntry[1] = str(int(value) * 1000) #ml = L * 1000
         drinkEntry[2] = str(int(value))
