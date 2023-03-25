@@ -16,9 +16,6 @@ class BoxLayoutExample(BoxLayout):
 class MainWidget(Widget):
     pass
 
-class TextInput(Widget):
-    pass
-
 class WaterApp(App):
     pass
 
