@@ -80,8 +80,26 @@ clicked.set("oz")
 drop = OptionMenu(main_menu, clicked, *options)
 drop.pack()
 
-
+global allDrinkEntries
 def display_total_saved(value, measurement):
+    drinkEntry = [None] * 3
+    if measurement == 'oz':
+        print("it's oz")
+        drinkEntry[0] = value
+        drinkEntry[1] = 0 #not finished
+        drinkEntry[2] = 0 #not finished
+    elif measurement == 'mL':
+        print("it's mL")
+        drinkEntry[0] = 0 #not finished
+        drinkEntry[1] = value
+        drinkEntry[2] = 0 #not finished
+    else:
+        print("it's L")
+        drinkEntry[0] = 0 #not finished
+        drinkEntry[1] = 0 #not finished
+        drinkEntry[2] = value
+
+    print(value)
     print(measurement)
 
 
