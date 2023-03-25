@@ -4,26 +4,43 @@ import tkinter as tk
 root = tk.Tk()
 
 # Set the window title
-root.title("Four Buttons")
+root.title("Main Menu")
 
 # Set the window size
-root.geometry("432x768")
+root.geometry("432x600")
 root.resizable("False", "False")
 
-button_frame = tk.Frame(root)
-button_frame.pack(side=tk.BOTTOM, padx=5, pady=5)
+main_frame = tk.Frame(root)
+stats_frame = tk.Frame(root)
+settings_frame = tk.Frame(root)
 
-# Create the buttons
-button1 = tk.Button(button_frame, text="Button 1")
-button1.pack(side=tk.LEFT, padx=5)
 
-button2 = tk.Button(button_frame, text="Button 2")
-button2.pack(side=tk.LEFT, padx=5)
+def change_to_main():
+    main_frame.pack(fill='both', expand=1)
+    settings_frame.pack_forget()
+    stats_frame.pack_forget()
 
-button3 = tk.Button(button_frame, text="Button 3")
-button3.pack(side=tk.LEFT, padx=5)
 
-button4 = tk.Button(button_frame, text="Button 4")
-button4.pack(side=tk.LEFT, padx=5)
+def change_to_stats():
+    stats_frame.pack(fill='both', expand=1)
+    main_frame.pack_forget()
+    settings_frame.pack_forget()
+
+def change_to_settings():
+    settings_frame.pack(fill='both', expand=1)
+    main_frame.pack_forget()
+    stats_frame.pack_forget()
+
+
+main_btn = tk.Button(root, text="Main", width=20, height=7, command=change_to_main())
+main_btn.pack(side=tk.LEFT)
+
+stats_btn = tk.Button(root, text="Stats", width=20, height=7, command=change_to_stats())
+stats_btn.pack(side=tk.LEFT)
+
+settings_btn = tk.Button(root, text="Settings", width=20, height=7, command=change_to_settings())
+settings_btn.pack(side=tk.LEFT)
+
+
 
 root.mainloop()
