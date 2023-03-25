@@ -1,12 +1,11 @@
-import kivy
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.label import Label
-
-class MyApp(App):
-    def build(self):
-        return Label(text = 'Hello World')
+from kivy.uix.widget import Widget
 
 
-if __name__ == '__main__':
-    MyApp().run()
+class MainWidget(Widget):
+    pass
+
+class WaterApp(App):
+    pass
+
+WaterApp().run()
