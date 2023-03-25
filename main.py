@@ -1,3 +1,4 @@
+import re
 import tkinter as tk
 from tkinter import *
 from PIL import Image, ImageTk
@@ -84,7 +85,7 @@ def display_total_saved(value, measurement):
 def validate_water_entry():
     value = entry.get()
     entry.delete(0, END)
-    if value.isnumeric() | value.isdecimal():  # Does not account for floats yet
+    if re.match("^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$", value):
         display_total_saved(value, clicked.get())
         clicked.set("oz")
         print("Yellooooo")
