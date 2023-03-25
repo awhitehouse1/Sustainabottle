@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import *
-from PIL import Image,ImageTk
+from PIL import Image, ImageTk
 import datetime as dt
 import time
 from PIL.Image import Resampling
-#Import pandas and matplotlib to use code.
+# Import pandas and matplotlib to use code.
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -28,21 +28,21 @@ root.title("Water App")
 root.geometry("432x600")
 root.resizable("False", "False")
 
-#Add the image
+# Add the image
 img = Image.open("bottle.png")
-img = img.resize((200,200), Resampling.LANCZOS)
+img = img.resize((200, 200), Resampling.LANCZOS)
 img = ImageTk.PhotoImage(img)
 label_image = tk.Label(image=img)
 label_image.image = img
-label_image.place(x=115,y=100)
-
-
+label_image.place(x=115, y=100)
 
 button_frame = tk.Frame(root)
 button_frame.pack(side=tk.BOTTOM, padx=5, pady=5)
 
+
 def donothing():  # Placeholder Function
     x = 1
+
 
 ####
 askTaskName = tk.Label(text="How much water did you drink since your last entry?", bg="white")
@@ -70,18 +70,26 @@ clicked.set("oz")
 drop = OptionMenu(root, clicked, *options)
 drop.pack()
 
+
+def display_total_saved(value, measurement):
+    print(measurement)
+
+
+
 def validate_water_entry():
     value = entry.get()
     entry.delete(0, END)
-    if value.isnumeric() | value.isdecimal(): #Does not account for floats yet
-        #call another method here
+    if value.isnumeric() | value.isdecimal():  # Does not account for floats yet
+        display_total_saved(value, clicked.get())
+        clicked.set("oz")
         print("Yellooooo")
     else:
-        #Display an error label here
+        # Display an error label here
         print("HI")
 
+
 # Create button, it will change label text
-button = Button(root, text="Enter", command=validate_water_entry) #Can be repurposed into
+button = Button(root, text="Enter", command=validate_water_entry)  # Can be repurposed into
 button.pack()
 
 # Create the buttons
