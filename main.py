@@ -25,11 +25,12 @@ root.title("Water App")
 main_menu = Frame(root)
 stats = Frame(root)
 settings = Frame(root)
-
+display_bottles_saved = LabelFrame(root, bg="green", borderwidth=2, relief="solid")
 
 # Define a function for switching the frames
 def change_to_main():
     main_menu.pack(fill='both', expand=1)
+    display_bottles_saved(fill='both', expand=1)
     stats.pack_forget()
     settings.pack_forget()
 
@@ -38,15 +39,25 @@ def change_to_stats():
     stats.pack(fill='both', expand=1)
     main_menu.pack_forget()
     settings.pack_forget()
+    display_bottles_saved.pack_forget()
 
 
 def change_to_settings():
     settings.pack(fill='both', expand=1)
     main_menu.pack_forget()
     stats.pack_forget()
+    display_bottles_saved.pack_forget()
 
 
 # Add a heading logo in the frames
+global total_saved
+total_saved = 0
+plastic_saved_label = Label(display_bottles_saved, text="Total Saved:", foreground="blue", borderwidth=2, relief="solid", padx=10, pady=10)
+plastic_saved_number = Label(display_bottles_saved, text=str(total_saved))
+bottles_label = Label(display_bottles_saved, text="bottles")
+plastic_saved_label.pack()
+plastic_saved_number.pack()
+bottles_label.pack()
 
 # MAIN MENU
 # Add the image
