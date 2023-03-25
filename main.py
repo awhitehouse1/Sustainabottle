@@ -1,27 +1,32 @@
-from kivy.app import App
-from kivy.properties import StringProperty
+import tkinter as tk
 
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.label import Label
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.scatter import Scatter
-from kivy.uix.textinput import TextInput
-from kivy.uix.widget import Widget
+# Create the main window
+root = tk.Tk()
 
+# Set the window title
+root.title("Four Buttons")
 
+# Set the window size
+root.geometry("300x100")
 
-class BoxLayoutExample(BoxLayout):
-    my_text = StringProperty("1")
-    text_input_str = StringProperty("1")
-    def on_button_click(self):
-        print("button clicked")
-    def on_text_validate(self, widget):
-        self.text_input_str = widget.text
+# Create a label
+label = tk.Label(root, text="Hello, World!")
+label.pack(pady=10)
 
-class MainWidget(Widget):
-    pass
+button_frame = tk.Frame(root)
+button_frame.pack(side=tk.BOTTOM, padx=5, pady=5)
 
-class WaterApp(App):
-    pass
+# Create the buttons
+button1 = tk.Button(button_frame, text="Button 1")
+button1.pack(side=tk.LEFT, padx=5)
 
-WaterApp().run()
+button2 = tk.Button(button_frame, text="Button 2")
+button2.pack(side=tk.LEFT, padx=5)
+
+button3 = tk.Button(button_frame, text="Button 3")
+button3.pack(side=tk.LEFT, padx=5)
+
+button4 = tk.Button(button_frame, text="Button 4")
+button4.pack(side=tk.LEFT, padx=5)
+# Run the main loop
+root.mainloop()
