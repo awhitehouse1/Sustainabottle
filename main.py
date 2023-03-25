@@ -8,6 +8,11 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 
 
+
+class BoxLayoutExample(BoxLayout):
+    def on_button_click(self):
+        print("button clicked")
+
 class MainWidget(Widget):
     pass
 
