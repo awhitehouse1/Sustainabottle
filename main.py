@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import *
+from PIL import Image,ImageTk
 import datetime as dt
 import time
+from PIL.Image import Resampling
 #Import pandas and matplotlib to use code.
 from pandas import DataFrame
 import matplotlib.pyplot as plt
@@ -10,6 +12,7 @@ import numpy as np
 
 # Tkinter  tutorial link: https://realpython.com/python-gui-tkinter/
 # Tkinter checkbox link: https://pythonbasics.org/tkinter-checkbox/
+# Tkinter image tutorial link: https://www.activestate.com/resources/quick-reads/how-to-add-images-in-tkinter/
 
 # Menu Code - Start
 # - https://www.tutorialspoint.com/python/tk_menu.htm - menus
@@ -24,6 +27,16 @@ root.title("Water App")
 # Set the window size
 root.geometry("432x600")
 root.resizable("False", "False")
+
+#Add the image
+img = Image.open("bottle.png")
+img = img.resize((200,200), Resampling.LANCZOS)
+img = ImageTk.PhotoImage(img)
+label_image = tk.Label(image=img)
+label_image.image = img
+label_image.place(x=115,y=100)
+
+
 
 button_frame = tk.Frame(root)
 button_frame.pack(side=tk.BOTTOM, padx=5, pady=5)
