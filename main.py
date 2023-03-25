@@ -21,11 +21,8 @@ root = tk.Tk()
 root.title("Water App")
 
 # Set the window size
-root.geometry("300x100")
-
-# Create a label
-label = tk.Label(root, text="Hello, World!")
-label.pack(pady=10)
+root.geometry("432x600")
+root.resizable("False", "False")
 
 button_frame = tk.Frame(root)
 button_frame.pack(side=tk.BOTTOM, padx=5, pady=5)
@@ -50,5 +47,6 @@ button3.pack(side=tk.LEFT, padx=5)
 
 button4 = tk.Button(button_frame, text="Button 4")
 button4.pack(side=tk.LEFT, padx=5)
+
 # Run the main loop
 root.mainloop()
