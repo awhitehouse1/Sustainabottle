@@ -1,14 +1,9 @@
-import tkinter as tk
+# Import the required libraries
 from tkinter import *
-from PIL import Image, ImageTk
-import datetime as dt
-import time
+from tkinter import font
+from PIL import Image,ImageTk
 from PIL.Image import Resampling
-# Import pandas and matplotlib to use code.
-from pandas import DataFrame
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import numpy as np
+import re
 
 # Tkinter  tutorial link: https://realpython.com/python-gui-tkinter/
 # Tkinter checkbox link: https://pythonbasics.org/tkinter-checkbox/
@@ -17,12 +12,6 @@ import numpy as np
 # Menu Code - Start
 # - https://www.tutorialspoint.com/python/tk_menu.htm - menus
 # - https://www.pythontutorial.net/tkinter/tkinter-menu/ - submenus
-
-# Import the required libraries
-from tkinter import *
-from tkinter import font
-from PIL import Image,ImageTk
-from PIL.Image import Resampling
 
 # Create an instance of tkinter frame or window
 root = Tk()
@@ -99,7 +88,7 @@ def display_total_saved(value, measurement):
 def validate_water_entry():
     value = entry.get()
     entry.delete(0, END)
-    if value.isnumeric() | value.isdecimal():  # Does not account for floats yet
+    if re.match("^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$", value):
         display_total_saved(value, clicked.get())
         clicked.set("oz")
         print("Yellooooo")
