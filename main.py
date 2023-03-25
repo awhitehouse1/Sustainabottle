@@ -70,9 +70,19 @@ clicked.set("oz")
 drop = OptionMenu(root, clicked, *options)
 drop.pack()
 
+def validate_water_entry():
+    value = entry.get()
+    entry.delete(0, END)
+    if value.isnumeric() | value.isdecimal(): #Does not account for floats yet
+        #call another method here
+        print("Yellooooo")
+    else:
+        #Display an error label here
+        print("HI")
+
 # Create button, it will change label text
-button = Button(root, text="Enter", command=donothing()).pack() #Can be repurposed into
-####
+button = Button(root, text="Enter", command=validate_water_entry) #Can be repurposed into
+button.pack()
 
 # Create the buttons
 button1 = tk.Button(button_frame, text="Button 1")
