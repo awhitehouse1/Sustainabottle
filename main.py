@@ -82,6 +82,8 @@ drop.pack()
 
 global allDrinkEntries
 def display_total_saved(value, measurement):
+    print(value)
+    print(measurement)
     drinkEntry = [None] * 3
     if measurement == 'oz':
         print("it's oz")
@@ -99,8 +101,9 @@ def display_total_saved(value, measurement):
         drinkEntry[1] = 0 #not finished
         drinkEntry[2] = value
 
-    print(value)
-    print(measurement)
+    allDrinkEntries.append(drinkEntry)
+
+
 
 
 def validate_water_entry():
