@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import *
 import datetime as dt
 import time
 #Import pandas and matplotlib to use code.
@@ -27,12 +28,37 @@ root.resizable("False", "False")
 button_frame = tk.Frame(root)
 button_frame.pack(side=tk.BOTTOM, padx=5, pady=5)
 
+def donothing():  # Placeholder Function
+    x = 1
+
 ####
-askTaskName = tk.Label(text="Enter the name of the task below.", bg="white")
+askTaskName = tk.Label(text="How much water did you drink since your last entry?", bg="white")
 entry = tk.Entry()
 
 askTaskName.pack()
 entry.pack()
+####
+
+####
+# Dropdown menu options
+options = [
+    "oz",
+    "mL",
+    "L"
+]
+
+# datatype of menu text
+clicked = StringVar()
+
+# initial menu text
+clicked.set("oz")
+
+# Create Dropdown menu
+drop = OptionMenu(root, clicked, *options)
+drop.pack()
+
+# Create button, it will change label text
+button = Button(root, text="Enter", command=donothing()).pack() #Can be repurposed into
 ####
 
 # Create the buttons
