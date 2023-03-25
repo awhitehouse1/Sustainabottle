@@ -4,6 +4,8 @@ from PIL import Image,ImageTk
 
 import datetime as dt
 import time
+
+from PIL.Image import Resampling
 #Import pandas and matplotlib to use code.
 from pandas import DataFrame
 import matplotlib.pyplot as plt
@@ -29,12 +31,12 @@ root.geometry("432x600")
 root.resizable("False", "False")
 
 #Add the image
-img = Image.open("bottle.jpg")
-img = img.resize((50,50), Image.ANTIALIAS)
+img = Image.open("bottle.png")
+img = img.resize((200,200), Resampling.LANCZOS)
 img = ImageTk.PhotoImage(img)
 label_image = tk.Label(image=img)
 label_image.image = img
-label_image.place(x=216,y=300)
+label_image.place(x=115,y=100)
 
 
 
