@@ -10,16 +10,45 @@ import numpy as np
 # Tkinter  tutorial link: https://realpython.com/python-gui-tkinter/
 # Tkinter checkbox link: https://pythonbasics.org/tkinter-checkbox/
 
-window = tk.Tk()
-
-window.title("Water App")
-window.geometry("800x600")
-window.config(bg="white")
-window.mainloop()
 # Menu Code - Start
 # - https://www.tutorialspoint.com/python/tk_menu.htm - menus
 # - https://www.pythontutorial.net/tkinter/tkinter-menu/ - submenus
-def donothing():  # Placeholder Function
-    filewin = tk.Toplevel(window)
-    button = tk.Button(filewin, text="Do nothing button")
-    button.pack()
+
+# Create the main window
+root = tk.Tk()
+
+# Set the window title
+root.title("Water App")
+
+# Set the window size
+root.geometry("300x100")
+
+# Create a label
+label = tk.Label(root, text="Hello, World!")
+label.pack(pady=10)
+
+button_frame = tk.Frame(root)
+button_frame.pack(side=tk.BOTTOM, padx=5, pady=5)
+
+####
+askTaskName = tk.Label(text="Enter the name of the task below.", bg="white")
+entry = tk.Entry()
+
+askTaskName.pack()
+entry.pack()
+####
+
+# Create the buttons
+button1 = tk.Button(button_frame, text="Button 1")
+button1.pack(side=tk.LEFT, padx=5)
+
+button2 = tk.Button(button_frame, text="Button 2")
+button2.pack(side=tk.LEFT, padx=5)
+
+button3 = tk.Button(button_frame, text="Button 3")
+button3.pack(side=tk.LEFT, padx=5)
+
+button4 = tk.Button(button_frame, text="Button 4")
+button4.pack(side=tk.LEFT, padx=5)
+# Run the main loop
+root.mainloop()
