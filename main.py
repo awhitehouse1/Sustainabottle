@@ -18,41 +18,62 @@ import numpy as np
 # - https://www.tutorialspoint.com/python/tk_menu.htm - menus
 # - https://www.pythontutorial.net/tkinter/tkinter-menu/ - submenus
 
-# Create the main window
-root = tk.Tk()
+# Import the required libraries
+from tkinter import *
+from tkinter import font
+from PIL import Image,ImageTk
+from PIL.Image import Resampling
 
-# Set the window title
-root.title("Water App")
+# Create an instance of tkinter frame or window
+root = Tk()
 
-# Set the window size
+# Set the size of the window
 root.geometry("432x600")
 root.resizable("False", "False")
+root.title("Water App")
 
+# Create two frames in the window
+main_menu = Frame(root)
+stats = Frame(root)
+settings = Frame(root)
+
+
+# Define a function for switching the frames
+def change_to_main():
+    main_menu.pack(fill='both', expand=1)
+    stats.pack_forget()
+    settings.pack_forget()
+
+
+def change_to_stats():
+    stats.pack(fill='both', expand=1)
+    main_menu.pack_forget()
+    settings.pack_forget()
+
+
+def change_to_settings():
+    settings.pack(fill='both', expand=1)
+    main_menu.pack_forget()
+    stats.pack_forget()
+
+
+# Add a heading logo in the frames
+
+# MAIN MENU
 # Add the image
 img = Image.open("bottle.png")
 img = img.resize((200, 200), Resampling.LANCZOS)
 img = ImageTk.PhotoImage(img)
-label_image = tk.Label(image=img)
+label_image = Label(main_menu, image=img)
 label_image.image = img
 label_image.place(x=115, y=100)
 
-button_frame = tk.Frame(root)
-button_frame.pack(side=tk.BOTTOM, padx=5, pady=5)
-
-
-def donothing():  # Placeholder Function
-    x = 1
-
-
-####
-askTaskName = tk.Label(text="How much water did you drink since your last entry?", bg="white")
-entry = tk.Entry()
+askTaskName = Label(main_menu, text="How much water did you drink since your last entry?", bg="white")
+entry = Entry(main_menu)
 
 askTaskName.pack()
 entry.pack()
-####
 
-####
 # Dropdown menu options
 options = [
     "oz",
@@ -67,13 +88,12 @@ clicked = StringVar()
 clicked.set("oz")
 
 # Create Dropdown menu
-drop = OptionMenu(root, clicked, *options)
+drop = OptionMenu(main_menu, clicked, *options)
 drop.pack()
 
 
 def display_total_saved(value, measurement):
     print(measurement)
-
 
 
 def validate_water_entry():
@@ -88,22 +108,24 @@ def validate_water_entry():
         print("HI")
 
 
-# Create button, it will change label text
-button = Button(root, text="Enter", command=validate_water_entry)  # Can be repurposed into
+button = Button(main_menu, text="Enter", command=validate_water_entry)  # Can be repurposed into
 button.pack()
 
-# Create the buttons
-button1 = tk.Button(button_frame, text="Button 1")
-button1.pack(side=tk.LEFT, padx=5)
 
-button2 = tk.Button(button_frame, text="Button 2")
-button2.pack(side=tk.LEFT, padx=5)
+label2 = Label(stats, text="in stats", foreground="blue")
+label2.pack(side=LEFT)
 
-button3 = tk.Button(button_frame, text="Button 3")
-button3.pack(side=tk.LEFT, padx=5)
+label3 = Label(settings, text="in settings")
+label3.pack(side=LEFT)
 
-button4 = tk.Button(button_frame, text="Button 4")
-button4.pack(side=tk.LEFT, padx=5)
+# Add a button to switch between two frames
+main_menu_btn = Button(root, text="Main Menu", height=7, width=20, command=change_to_main)
+main_menu_btn.place(x=0, y=520)
 
-# Run the main loop
+stats_btn = Button(root, text="Stats", height=7, width=20, command=change_to_stats)
+stats_btn.place(x=145, y=520)
+
+settings_btn = Button(root, text="Settings", height=7, width=20, command=change_to_settings)
+settings_btn.place(x=290, y=520)
+
 root.mainloop()
