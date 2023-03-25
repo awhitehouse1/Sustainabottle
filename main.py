@@ -55,7 +55,7 @@ img = img.resize((200, 200), Resampling.LANCZOS)
 img = ImageTk.PhotoImage(img)
 label_image = Label(main_menu, image=img)
 label_image.image = img
-label_image.place(x=115, y=100)
+label_image.pack()
 
 askTaskName = Label(main_menu, text="How much water did you drink since your last entry?", bg="white")
 entry = Entry(main_menu)
@@ -100,12 +100,14 @@ def validate_water_entry():
 button = Button(main_menu, text="Enter", command=validate_water_entry)  # Can be repurposed into
 button.pack()
 
+main_menu.pack()
 
 label2 = Label(stats, text="in stats", foreground="blue")
 label2.pack(side=LEFT)
 
 label3 = Label(settings, text="in settings")
 label3.pack(side=LEFT)
+
 
 # Add a button to switch between two frames
 main_menu_btn = Button(root, text="Main Menu", height=7, width=20, command=change_to_main)
@@ -116,5 +118,6 @@ stats_btn.place(x=145, y=520)
 
 settings_btn = Button(root, text="Settings", height=7, width=20, command=change_to_settings)
 settings_btn.place(x=290, y=520)
+
 
 root.mainloop()
