@@ -30,7 +30,6 @@ display_bottles_saved = LabelFrame(root, bg="green", borderwidth=2, relief="soli
 # Define a function for switching the frames
 def change_to_main():
     main_menu.pack(fill='both', expand=1)
-    display_bottles_saved(fill='both', expand=1)
     stats.pack_forget()
     settings.pack_forget()
 
@@ -39,22 +38,20 @@ def change_to_stats():
     stats.pack(fill='both', expand=1)
     main_menu.pack_forget()
     settings.pack_forget()
-    display_bottles_saved.pack_forget()
 
 
 def change_to_settings():
     settings.pack(fill='both', expand=1)
     main_menu.pack_forget()
     stats.pack_forget()
-    display_bottles_saved.pack_forget()
 
 
 # Add a heading logo in the frames
 global total_saved
 total_saved = 0
-plastic_saved_label = Label(display_bottles_saved, text="Total Saved:", foreground="blue", borderwidth=2, relief="solid", padx=10, pady=10)
-plastic_saved_number = Label(display_bottles_saved, text=str(total_saved))
-bottles_label = Label(display_bottles_saved, text="bottles")
+plastic_saved_label = Label(main_menu, text="Total Saved:", foreground="blue", borderwidth=2, relief="solid", padx=10, pady=10)
+plastic_saved_number = Label(main_menu, text=str(total_saved))
+bottles_label = Label(main_menu, text="bottles")
 plastic_saved_label.pack()
 plastic_saved_number.pack()
 bottles_label.pack()
@@ -134,7 +131,7 @@ def validate_water_entry():
 button = Button(main_menu, text="Enter", command=validate_water_entry)  # Can be repurposed into
 button.pack()
 
-main_menu.pack()
+main_menu.pack(fill='both', expand=1)
 
 label2 = Label(stats, text="in stats", foreground="blue")
 label2.pack(side=LEFT)
