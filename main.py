@@ -174,7 +174,9 @@ def validate_water_entry():
         display_total_entries(value, clicked.get(), currentTime)
     else:
         # Display an error label here
-        print("HI")
+        error_label = Label(canvas1, text="Please enter a valid number.", bg="white", font=('Arial',12), foreground="red")
+        error_label.place(x=110,y=105)
+        canvas1.after(2000, error_label.destroy)
 
 button = Button(canvas1, text="Enter", command=validate_water_entry)
 button.pack()
