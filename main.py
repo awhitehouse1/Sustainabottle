@@ -79,8 +79,8 @@ plastic_saved_number.pack(side=RIGHT)
 # label_image.pack()
 
 
-askTaskName = Label(main_menu, text="How much water did you drink since your last entry?", bg="white")
-entry = Entry(main_menu)
+askTaskName = Label(canvas1, text="How much water did you drink since your last entry?", bg="white")
+entry = Entry(canvas1)
 
 askTaskName.pack()
 entry.pack()
@@ -99,7 +99,7 @@ clicked = StringVar()
 clicked.set("oz")
 
 # Create Dropdown menu
-drop = OptionMenu(main_menu, clicked, *options)
+drop = OptionMenu(canvas1, clicked, *options)
 drop.pack()
 
 global allDrinkEntries
@@ -146,7 +146,7 @@ def validate_water_entry():
         print("HI")
 
 
-button = Button(main_menu, text="Enter", command=validate_water_entry)  # Can be repurposed into
+button = Button(canvas1, text="Enter", command=validate_water_entry)  # Can be repurposed into
 button.pack()
 
 display_bottles_saved.pack()
