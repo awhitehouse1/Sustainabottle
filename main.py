@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import font
 from PIL import Image,ImageTk
 from PIL.Image import Resampling
-import re
+import re, datetime
 
 # Tkinter  tutorial link: https://realpython.com/python-gui-tkinter/
 # Tkinter checkbox link: https://pythonbasics.org/tkinter-checkbox/
@@ -81,10 +81,12 @@ drop = OptionMenu(main_menu, clicked, *options)
 drop.pack()
 
 global allDrinkEntries
-allDrinkEntries= []
-def display_total_entries(value, measurement):
+allDrinkEntries = []
+def display_total_entries(value, measurement, currentTime):
     global allDrinkEntries
-    drinkEntry = [None] * 3
+    drinkEntry = [None] * 4
+    print(currentTime)
+    drinkEntry[3] = str(currentTime)
     if measurement == 'oz':
         drinkEntry[0] = str(int(value))
         drinkEntry[1] = str(int(value) * 29.57353) #milliliters = fluid ounces × 29.57353
@@ -111,8 +113,10 @@ def validate_water_entry():
     value = entry.get()
     entry.delete(0, END)
     if re.match("^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$", value):
+        currentTime = datetime.datetime.now()
+        print(currentTime)
         display_total_saved(value, clicked.get())
-        display_total_entries(value, clicked.get())
+        display_total_entries(value, clicked.get(), currentTime)
         clicked.set("oz")
         print("Yellooooo")
     else:
