@@ -74,7 +74,7 @@ def set_water_bottles():
         img1 = ImageTk.PhotoImage(img1)
         check_mark_label = Label(stats, image=img1, bg="white")
         check_mark_label.image = img1
-        check_mark_label.place(x=305, y=5)
+        check_mark_label.place(x=280, y=5)
         label_image.append(check_mark_label)
     for i in range(floor(daily_num_bottles*2)):
         if i >= 8:
@@ -149,7 +149,6 @@ def display_total_entries(value, measurement, currentTime):
 
     num_bottles = round(total_saved/16,2)
     allDrinkEntries.append(drinkEntry)
-    print("array", list(allDrinkEntries))
     plastic_saved_number.destroy()
     plastic_saved_number = Label(canvas1, text=str(num_bottles), bg="white", font=('Arial', 80, 'bold'))
     plastic_saved_number.place(x=165, y=225)
@@ -172,7 +171,6 @@ def validate_water_entry():
     entry.delete(0, END)
     if re.match("^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$", value):
         currentTime = datetime.datetime.now()
-        print(currentTime)
         display_total_entries(value, clicked.get(), currentTime)
     else:
         # Display an error label here
@@ -187,7 +185,7 @@ plastic_saved_number.place(x=165,y=225)
 
 main_menu.pack(fill='both', expand=1)
 
-label2 = Label(stats, text="Daily Goal: 8 glasses of water", bg="white", font=('Arial', 16, 'bold'), padx=1)
+label2 = Label(stats, text="Daily Goal: 8 cups of water", bg="white", font=('Arial', 16, 'bold'), padx=1)
 label2.pack(side=TOP, anchor=NW)
 
 label3 = Label(settings, text="in settings")
@@ -202,9 +200,9 @@ def list_badges():
     badges_label.place(x=0,y=200)
 
     if num_bottles >= 1:
-        bottle_1 = Image.open("badge1.png")
+        bottle_1 = Image.open("badge_1.png")
     else:
-        bottle_1 = Image.open("badge1.png")
+        bottle_1 = Image.open("badge_1_gray.png")
     bottle_1 = bottle_1.resize((100, 100), Resampling.LANCZOS)
     bottle_1 = ImageTk.PhotoImage(bottle_1)
     bottle_1_label = Label(stats, image=bottle_1, bg="white")
@@ -213,10 +211,10 @@ def list_badges():
     label_image.append(bottle_1_label)
 
     if num_bottles >= 10:
-        bottle_10 = Image.open("badge1.png")
+        bottle_10 = Image.open("badge_10.png")
     else:
-        bottle_10 = Image.open("badge1.png")
-    bottle_10 = bottle_10.resize((100, 100), Resampling.LANCZOS)
+        bottle_10 = Image.open("badge_10_gray.png")
+    bottle_10 = bottle_10.resize((105, 105), Resampling.LANCZOS)
     bottle_10 = ImageTk.PhotoImage(bottle_10)
     bottle_10_label = Label(stats, image=bottle_10, bg="white")
     bottle_10_label.image = bottle_10
@@ -224,10 +222,10 @@ def list_badges():
     label_image.append(bottle_10_label)
 
     if num_bottles >= 50:
-        bottle_50 = Image.open("badge1.png")
+        bottle_50 = Image.open("badge_50.png")
     else:
-        bottle_50 = Image.open("badge1.png")
-    bottle_50 = bottle_50.resize((100, 100), Resampling.LANCZOS)
+        bottle_50 = Image.open("badge_50_gray.png")
+    bottle_50 = bottle_50.resize((105, 105), Resampling.LANCZOS)
     bottle_50 = ImageTk.PhotoImage(bottle_50)
     bottle_50_label = Label(stats, image=bottle_50, bg="white")
     bottle_50_label.image = bottle_50
@@ -235,32 +233,32 @@ def list_badges():
     label_image.append(bottle_50_label)
 
     if num_bottles >= 100:
-        bottle_100 = Image.open("badge1.png")
+        bottle_100 = Image.open("badge_100.png")
     else:
-        bottle_100 = Image.open("badge1.png")
-    bottle_100 = bottle_100.resize((100, 100), Resampling.LANCZOS)
+        bottle_100 = Image.open("badge_100_gray.png")
+    bottle_100 = bottle_100.resize((110, 110), Resampling.LANCZOS)
     bottle_100 = ImageTk.PhotoImage(bottle_100)
     bottle_100_label = Label(stats, image=bottle_100, bg="white")
     bottle_100_label.image = bottle_100
-    bottle_100_label.place(x=15,y=370)
+    bottle_100_label.place(x=10,y=370)
     label_image.append(bottle_100_label)
 
     if num_bottles >= 24:
-        one_pound_plastic = Image.open("badge1.png")
+        one_pound_plastic = Image.open("badge_1_pound.png")
     else:
-        one_pound_plastic = Image.open("badge1.png")
-    one_pound_plastic = one_pound_plastic.resize((100, 100), Resampling.LANCZOS)
+        one_pound_plastic = Image.open("badge_1_pound_gray.png")
+    one_pound_plastic = one_pound_plastic.resize((105, 105), Resampling.LANCZOS)
     one_pound_plastic = ImageTk.PhotoImage(one_pound_plastic)
     one_pound_plastic_label = Label(stats, image=one_pound_plastic, bg="white")
     one_pound_plastic_label.image = one_pound_plastic
-    one_pound_plastic_label.place(x=165,y=370)
+    one_pound_plastic_label.place(x=165,y=375)
     label_image.append(one_pound_plastic_label)
 
     if num_bottles >= 120:
-        five_pounds_plastic = Image.open("badge1.png")
+        five_pounds_plastic = Image.open("badge_5_pounds.png")
     else:
-        five_pounds_plastic = Image.open("badge1.png")
-    five_pounds_plastic = five_pounds_plastic.resize((100, 100), Resampling.LANCZOS)
+        five_pounds_plastic = Image.open("badge_5_pounds_gray.png")
+    five_pounds_plastic = five_pounds_plastic.resize((100, 110), Resampling.LANCZOS)
     five_pounds_plastic = ImageTk.PhotoImage(five_pounds_plastic)
     five_pounds_plastic_label = Label(stats, image=five_pounds_plastic, bg="white")
     five_pounds_plastic_label.image = five_pounds_plastic
