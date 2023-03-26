@@ -1,4 +1,5 @@
 # Import the required libraries
+from decimal import Decimal
 from tkinter import *
 from tkinter import font
 from PIL import Image,ImageTk
@@ -25,6 +26,12 @@ root.title("Water App")
 main_menu = Frame(root)
 stats = Frame(root)
 settings = Frame(root)
+
+global total_saved
+total_saved = 0
+
+global num_bottles
+num_bottles = 0
 
 bg = Image.open("background.png")
 bg = bg.resize((429,600), Resampling.LANCZOS)
@@ -93,31 +100,34 @@ drop.pack()
 global allDrinkEntries
 allDrinkEntries = []
 def display_total_entries(value, measurement, currentTime):
-    global allDrinkEntries
+    global allDrinkEntries, total_saved, num_bottles, plastic_saved_number
     drinkEntry = [None] * 4
     print(currentTime)
     drinkEntry[3] = str(currentTime)
     if measurement == 'oz':
+        total_saved += Decimal(value)
         drinkEntry[0] = str(int(value))
         drinkEntry[1] = str(int(value) * 29.57353) #milliliters = fluid ounces × 29.57353
         drinkEntry[2] = str(int(value)/34) #L = oz/33.814
 
     elif measurement == 'mL':
         drinkEntry[0] = str(int(value)/29.57353) #oz = mL/29.57353
+        total_saved += Decimal(drinkEntry[0])
         drinkEntry[1] = str(int(value))
         drinkEntry[2] = str(int(value)/1000) #L = mL/1000
     else:
         drinkEntry[0] = str(int(value) * 33.814) #oz = L * 33.814
+        total_saved = Decimal(drinkEntry[0])
         drinkEntry[1] = str(int(value) * 1000) #ml = L * 1000
         drinkEntry[2] = str(int(value))
-
+    num_bottles = round(total_saved/16,2)
+    if len(str(num_bottles)) > 4:
+        num_bottles = round(num_bottles)
     allDrinkEntries.append(drinkEntry)
+    plastic_saved_number.destroy()
+    plastic_saved_number = Label(canvas1, text=str(num_bottles), bg="white", font=('Arial', 80, 'bold'))
+    plastic_saved_number.place(x=165, y=225)
     print(allDrinkEntries)
-
-def display_total_saved(value, measurement):
-    print(value)
-    print(measurement)
-
 
 def validate_water_entry():
     value = entry.get()
@@ -125,10 +135,8 @@ def validate_water_entry():
     if re.match("^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$", value):
         currentTime = datetime.datetime.now()
         print(currentTime)
-        display_total_saved(value, clicked.get())
         display_total_entries(value, clicked.get(), currentTime)
         clicked.set("oz")
-        print("Yellooooo")
     else:
         # Display an error label here
         print("HI")
@@ -136,9 +144,8 @@ def validate_water_entry():
 button = Button(canvas1, text="Enter", command=validate_water_entry)
 button.pack()
 
-global total_saved
-total_saved = 100
-plastic_saved_number = Label(canvas1, text=str(total_saved), bg="white", font=('Arial',80,'bold'))
+global plastic_saved_number
+plastic_saved_number = Label(canvas1, text=str(num_bottles), bg="white", font=('Arial',80,'bold'))
 plastic_saved_number.place(x=165,y=225)
 
 main_menu.pack(fill='both', expand=1)
@@ -170,7 +177,7 @@ stats_btn.place(x=0, y=520)
 image_settings=Image.open('settings_icon.png')
 # Resize the image in the given (width, height)
 image_settings=image_settings.resize((80, 75))
-# Conver the image in TkImage
+# Convert the image in TkImage
 image_settings=ImageTk.PhotoImage(image_settings)
 settings_btn = Button(root, image=image_settings, bg="#76b5a5", command=change_to_settings, width=150, activebackground="#76b5a5")
 settings_btn.place(x=290, y=520)
