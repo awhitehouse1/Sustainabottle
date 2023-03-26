@@ -160,15 +160,20 @@ label3.pack(side=LEFT)
 
 
 # Add a button to switch between two frames
-main_menu_btn = Button(root, text="Main Menu", height=7, width=20, command=change_to_main)
+main_menu_btn = Button(root, text="Main Menu", height=7, width=20, bg="#76b5a5", command=change_to_main)
 main_menu_btn.place(x=0, y=520)
 
-stats_btn = Button(root, text="Stats", height=7, width=20, command=change_to_stats)
+stats_btn = Button(root, text="Stats", height=7, width=20, bg="#76b5a5", command=change_to_stats)
 stats_btn.place(x=145, y=520)
 
-photo = PhotoImage(file = r"settings_icon.png")
-photoimage = photo.subsample(2, 2)
-settings_btn = Button(root, image= photoimage, compound=LEFT, height=100, width=200, command=change_to_settings)
+canvas= Canvas(root, width= 600, height= 400)
+canvas.pack()
+#Load an image in the script
+img= (Image.open("settings_icon.png"))
+#Resize the Image using resize method
+resized_image= img.resize((100, 100), Image.ANTIALIAS)
+new_image= ImageTk.PhotoImage(resized_image)
+settings_btn = Button(root, image= new_image, compound=RIGHT, bg="#76b5a5", height=100, width=200, command=change_to_settings)
 settings_btn.place(x=290, y=520)
 
 root.mainloop()
