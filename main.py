@@ -225,17 +225,39 @@ is_on = False
 
 def switch():
     global is_on
+    global number_entry
+    global number_label
+    global time_label
+    global hrs_entry
+    global mins_entry
+    global clicked2
+    global drop_time
+    global time_label
+    global update_button
     if is_on:
         on_button.config(image=off)
         is_on = False
-        number_entry.pack_forget()
-        number_label.pack_forget()
-        update_button.pack_forget()
-        time_label.pack_forget()
-        drop_time.pack_forget()
-        mins_entry.pack_forget()
-        hrs_entry.pack_forget()
+        number_entry.destroy()
+        number_label.destroy()
+        update_button.destroy()
+        time_label.destroy()
+        drop_time.destroy()
+        mins_entry.destroy()
+        hrs_entry.destroy()
     else:
+        number_entry = Entry(canvas_settings, font=('Arial', 15), width=13)
+        number_label = Label(canvas_settings, text="Enter phone number:", bg="white", font=('Arial', 15))
+        time_label = Label(canvas_settings, text="Add reminder")
+        hrs_entry = Entry(canvas_settings, width=3, font=('Arial', 15))
+        mins_entry = Entry(canvas_settings, width=3, font=('Arial', 15))
+        time_options = ['am', 'pm']
+        clicked2 = StringVar()
+        clicked2.set("am")
+        drop_time = OptionMenu(canvas_settings, clicked2, *time_options)
+        time_label = Label(canvas_settings, text="Enter a time:", bg='white', font=('Arial', 15))
+        update_button = Button(canvas_settings, text="Update Settings", bg="#76b5a5", font=('Arial', 15, 'bold'),
+                               command=msg_send_time, activebackground="#76b5a5")
+
         on_button.config(image=on)
         is_on = True
         number_label.place(x=25, y=210)
