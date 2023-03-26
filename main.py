@@ -27,6 +27,19 @@ stats = Frame(root)
 settings = Frame(root)
 display_bottles_saved = Frame(root, bg="light green", borderwidth=2, relief="solid")
 
+bg = Image.open("background.png")
+bg = bg.resize((429,600), Resampling.LANCZOS)
+bg = ImageTk.PhotoImage(bg)
+# Create Canvas
+canvas1 = Canvas(main_menu, width=500,
+                 height=800)
+
+canvas1.pack(fill="both", expand=True)
+
+# Display image
+canvas1.create_image(0, 0, image=bg,
+                     anchor="nw")
+
 # Define a function for switching the frames
 def change_to_main():
     main_menu.pack(fill='both', expand=1)
@@ -58,12 +71,13 @@ plastic_saved_number.pack(side=RIGHT)
 
 # MAIN MENU
 # Add the image
-img = Image.open("bottle.png")
-img = img.resize((200, 200), Resampling.LANCZOS)
-img = ImageTk.PhotoImage(img)
-label_image = Label(main_menu, image=img)
-label_image.image = img
-label_image.pack()
+# img = Image.open("bottle.png")
+# img = img.resize((200, 200), Resampling.LANCZOS)
+# img = ImageTk.PhotoImage(img)
+# label_image = Label(main_menu, image=img)
+# label_image.image = img
+# label_image.pack()
+
 
 askTaskName = Label(main_menu, text="How much water did you drink since your last entry?", bg="white")
 entry = Entry(main_menu)
@@ -148,7 +162,9 @@ main_menu_btn.place(x=0, y=520)
 stats_btn = Button(root, text="Stats", height=7, width=20, command=change_to_stats)
 stats_btn.place(x=145, y=520)
 
-settings_btn = Button(root, text="Settings", height=7, width=20, command=change_to_settings)
+photo = PhotoImage(file = r"settings_icon.png")
+photoimage = photo.subsample(2, 2)
+settings_btn = Button(root, image= photoimage, compound=LEFT, height=100, width=200, command=change_to_settings)
 settings_btn.place(x=290, y=520)
 
 root.mainloop()
