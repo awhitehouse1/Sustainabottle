@@ -33,6 +33,9 @@ total_saved = 0
 global num_bottles
 num_bottles = 0
 
+global text_size
+text_size = 80
+
 bg = Image.open("background.png")
 bg = bg.resize((429,600), Resampling.LANCZOS)
 bg = ImageTk.PhotoImage(bg)
@@ -100,33 +103,34 @@ drop.pack()
 global allDrinkEntries
 allDrinkEntries = []
 def display_total_entries(value, measurement, currentTime):
-    global allDrinkEntries, total_saved, num_bottles, plastic_saved_number
+    global allDrinkEntries, total_saved, num_bottles, plastic_saved_number, text_size
     drinkEntry = [None] * 4
     print(currentTime)
     drinkEntry[3] = str(currentTime)
     if measurement == 'oz':
         total_saved += Decimal(value)
-        drinkEntry[0] = str(int(value))
-        drinkEntry[1] = str(int(value) * 29.57353) #milliliters = fluid ounces × 29.57353
-        drinkEntry[2] = str(int(value)/34) #L = oz/33.814
+        drinkEntry[0] = str(Decimal(value))
+        drinkEntry[1] = str(Decimal(value) * Decimal(29.57353)) #milliliters = fluid ounces × 29.57353
+        drinkEntry[2] = str(Decimal(value)/34) #L = oz/33.814
 
     elif measurement == 'mL':
-        drinkEntry[0] = str(int(value)/29.57353) #oz = mL/29.57353
+        drinkEntry[0] = str(Decimal(value)/Decimal(29.57353)) #oz = mL/29.57353
         total_saved += Decimal(drinkEntry[0])
-        drinkEntry[1] = str(int(value))
-        drinkEntry[2] = str(int(value)/1000) #L = mL/1000
+        drinkEntry[1] = str(Decimal(value))
+        drinkEntry[2] = str(Decimal(value)/1000) #L = mL/1000
     else:
-        drinkEntry[0] = str(int(value) * 33.814) #oz = L * 33.814
+        drinkEntry[0] = str(Decimal(value) * Decimal(33.814)) #oz = L * 33.814
         total_saved = Decimal(drinkEntry[0])
-        drinkEntry[1] = str(int(value) * 1000) #ml = L * 1000
-        drinkEntry[2] = str(int(value))
+        drinkEntry[1] = str(Decimal(value) * 1000) #ml = L * 1000
+        drinkEntry[2] = str(Decimal(value))
     num_bottles = round(total_saved/16,2)
-    if len(str(num_bottles)) > 4:
-        num_bottles = round(num_bottles)
     allDrinkEntries.append(drinkEntry)
     plastic_saved_number.destroy()
     plastic_saved_number = Label(canvas1, text=str(num_bottles), bg="white", font=('Arial', 80, 'bold'))
     plastic_saved_number.place(x=165, y=225)
+    while plastic_saved_number.winfo_reqwidth() > 216:
+        text_size -= 1
+        plastic_saved_number.configure(font=('Arial', text_size, 'bold'))
     print(allDrinkEntries)
 
 def validate_water_entry():
@@ -136,7 +140,6 @@ def validate_water_entry():
         currentTime = datetime.datetime.now()
         print(currentTime)
         display_total_entries(value, clicked.get(), currentTime)
-        clicked.set("oz")
     else:
         # Display an error label here
         print("HI")
@@ -145,7 +148,7 @@ button = Button(canvas1, text="Enter", command=validate_water_entry)
 button.pack()
 
 global plastic_saved_number
-plastic_saved_number = Label(canvas1, text=str(num_bottles), bg="white", font=('Arial',80,'bold'))
+plastic_saved_number = Label(canvas1, text=str(num_bottles), bg="white", font=('Arial',text_size,'bold'))
 plastic_saved_number.place(x=165,y=225)
 
 main_menu.pack(fill='both', expand=1)
