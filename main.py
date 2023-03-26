@@ -40,6 +40,12 @@ text_size = 80
 global label_image
 label_image = []
 
+global daily_count
+daily_count = 0
+
+global allDrinkEntries
+allDrinkEntries = []
+
 
 bg = Image.open("background.png")
 bg = bg.resize((429,600), Resampling.LANCZOS)
@@ -55,10 +61,11 @@ canvas1.create_image(0, 0, image=bg,
                      anchor="nw")
 
 def set_water_bottles():
-    global label_image
+    global label_image, daily_count
+    daily_num_bottles = daily_count/16
     for label in label_image:
         label.destroy()
-    if floor(num_bottles*2) >= 8:
+    if floor(daily_num_bottles*2) >= 8:
         img1 = Image.open("checkmark.png")
         img1 = img1.resize((20, 20), Resampling.LANCZOS)
         img1 = ImageTk.PhotoImage(img1)
@@ -66,7 +73,7 @@ def set_water_bottles():
         check_mark_label.image = img1
         check_mark_label.place(x=305, y=5)
         label_image.append(check_mark_label)
-    for i in range(floor(num_bottles*2)):
+    for i in range(floor(daily_num_bottles*2)):
         if i >= 8:
             break
         img = Image.open("bottle.png")
@@ -117,39 +124,44 @@ clicked.set("oz")
 drop = OptionMenu(canvas1, clicked, *options)
 drop.pack()
 
-global allDrinkEntries
-allDrinkEntries = []
 def display_total_entries(value, measurement, currentTime):
-    global allDrinkEntries, total_saved, num_bottles, plastic_saved_number, text_size
+    global allDrinkEntries, total_saved, num_bottles, plastic_saved_number, text_size, daily_count
     drinkEntry = [None] * 4
-    print(currentTime)
     drinkEntry[3] = str(currentTime)
     if measurement == 'oz':
-        total_saved += Decimal(value)
         drinkEntry[0] = str(Decimal(value))
         drinkEntry[1] = str(Decimal(value) * Decimal(29.57353)) #milliliters = fluid ounces × 29.57353
         drinkEntry[2] = str(Decimal(value)/34) #L = oz/33.814
 
     elif measurement == 'mL':
         drinkEntry[0] = str(Decimal(value)/Decimal(29.57353)) #oz = mL/29.57353
-        total_saved += Decimal(drinkEntry[0])
         drinkEntry[1] = str(Decimal(value))
         drinkEntry[2] = str(Decimal(value)/1000) #L = mL/1000
     else:
         drinkEntry[0] = str(Decimal(value) * Decimal(33.814)) #oz = L * 33.814
-        total_saved = Decimal(drinkEntry[0])
         drinkEntry[1] = str(Decimal(value) * 1000) #ml = L * 1000
         drinkEntry[2] = str(Decimal(value))
+    total_saved += Decimal(drinkEntry[0])
+
     num_bottles = round(total_saved/16,2)
     allDrinkEntries.append(drinkEntry)
+    print("array", list(allDrinkEntries))
     plastic_saved_number.destroy()
     plastic_saved_number = Label(canvas1, text=str(num_bottles), bg="white", font=('Arial', 80, 'bold'))
     plastic_saved_number.place(x=165, y=225)
     while plastic_saved_number.winfo_reqwidth() > 216:
         text_size -= 1
         plastic_saved_number.configure(font=('Arial', text_size, 'bold'))
+    daily_count = 0
+    current_day = datetime.datetime.now()
+    current_day = str(current_day).split(" ")
+    current_day = current_day[0]
+    for val in allDrinkEntries:
+        logged_day = val[3].split(" ")
+        bottle_day = logged_day[0]
+        if bottle_day == current_day:
+            daily_count += Decimal(val[0])
     set_water_bottles()
-    print(allDrinkEntries)
 
 def validate_water_entry():
     value = entry.get()
