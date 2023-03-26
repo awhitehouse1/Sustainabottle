@@ -160,20 +160,28 @@ label3.pack(side=LEFT)
 
 
 # Add a button to switch between two frames
-main_menu_btn = Button(root, text="Main Menu", height=7, width=20, bg="#76b5a5", command=change_to_main)
-main_menu_btn.place(x=0, y=520)
+image_main=Image.open('main_menu_icon.png')
+# Resize the image in the given (width, height)
+image_main=image_main.resize((150, 75))
+# Conver the image in TkImage
+image_main=ImageTk.PhotoImage(image_main)
+main_menu_btn = Button(root, image=image_main, width=150, bg="#76b5a5", command=change_to_main, activebackground="#76b5a5")
+main_menu_btn.place(x=145, y=520)
 
-stats_btn = Button(root, text="Stats", height=7, width=20, bg="#76b5a5", command=change_to_stats)
-stats_btn.place(x=145, y=520)
+image_stats=Image.open('stats_icon.png')
+# Resize the image in the given (width, height)
+image_stats=image_stats.resize((80, 75))
+# Conver the image in TkImage
+image_stats=ImageTk.PhotoImage(image_stats)
+stats_btn = Button(root, image=image_stats, width=150, bg="#76b5a5", command=change_to_stats, activebackground="#76b5a5")
+stats_btn.place(x=0, y=520)
 
-canvas= Canvas(root, width= 600, height= 400)
-canvas.pack()
-#Load an image in the script
-img= (Image.open("settings_icon.png"))
-#Resize the Image using resize method
-resized_image= img.resize((100, 100), Image.ANTIALIAS)
-new_image= ImageTk.PhotoImage(resized_image)
-settings_btn = Button(root, image= new_image, compound=RIGHT, bg="#76b5a5", height=100, width=200, command=change_to_settings)
+image_settings=Image.open('settings_icon.png')
+# Resize the image in the given (width, height)
+image_settings=image_settings.resize((80, 75))
+# Conver the image in TkImage
+image_settings=ImageTk.PhotoImage(image_settings)
+settings_btn = Button(root, image=image_settings, bg="#76b5a5", command=change_to_settings, width=150, activebackground="#76b5a5")
 settings_btn.place(x=290, y=520)
 
 root.mainloop()
