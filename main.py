@@ -1,5 +1,6 @@
 # Import the required libraries
 from decimal import Decimal
+from math import floor
 from tkinter import *
 from tkinter import font
 from PIL import Image,ImageTk
@@ -24,8 +25,8 @@ root.title("Water App")
 
 # Create two frames in the window
 main_menu = Frame(root)
-stats = Frame(root)
-settings = Frame(root)
+stats = Frame(root, bg="white")
+settings = Frame(root, bg="white")
 
 global total_saved
 total_saved = 0
@@ -35,6 +36,10 @@ num_bottles = 0
 
 global text_size
 text_size = 80
+
+global label_image
+label_image = []
+
 
 bg = Image.open("background.png")
 bg = bg.resize((429,600), Resampling.LANCZOS)
@@ -49,6 +54,29 @@ canvas1.pack(fill="both", expand=True)
 canvas1.create_image(0, 0, image=bg,
                      anchor="nw")
 
+def set_water_bottles():
+    global label_image
+    for label in label_image:
+        label.destroy()
+    if floor(num_bottles*2) >= 8:
+        img1 = Image.open("checkmark.png")
+        img1 = img1.resize((20, 20), Resampling.LANCZOS)
+        img1 = ImageTk.PhotoImage(img1)
+        check_mark_label = Label(stats, image=img1, bg="white")
+        check_mark_label.image = img1
+        check_mark_label.place(x=305, y=5)
+        label_image.append(check_mark_label)
+    for i in range(floor(num_bottles*2)):
+        if i >= 8:
+            break
+        img = Image.open("bottle.png")
+        img = img.resize((40, 80), Resampling.LANCZOS)
+        img = ImageTk.PhotoImage(img)
+        image_label = Label(stats, image=img, bg="white")
+        image_label.image = img
+        image_label.pack(side=LEFT, anchor=NW, padx=1)
+        label_image.append(image_label)
+
 # Define a function for switching the frames
 def change_to_main():
     main_menu.pack(fill='both', expand=1)
@@ -61,21 +89,10 @@ def change_to_stats():
     main_menu.pack_forget()
     settings.pack_forget()
 
-
 def change_to_settings():
     settings.pack(fill='both', expand=1)
     main_menu.pack_forget()
     stats.pack_forget()
-
-# MAIN MENU
-# Add the image
-# img = Image.open("bottle.png")
-# img = img.resize((200, 200), Resampling.LANCZOS)
-# img = ImageTk.PhotoImage(img)
-# label_image = Label(main_menu, image=img)
-# label_image.image = img
-# label_image.pack()
-
 
 askTaskName = Label(canvas1, text="How much water did you drink since your last entry?", bg="white")
 entry = Entry(canvas1)
@@ -131,6 +148,7 @@ def display_total_entries(value, measurement, currentTime):
     while plastic_saved_number.winfo_reqwidth() > 216:
         text_size -= 1
         plastic_saved_number.configure(font=('Arial', text_size, 'bold'))
+    set_water_bottles()
     print(allDrinkEntries)
 
 def validate_water_entry():
@@ -153,8 +171,8 @@ plastic_saved_number.place(x=165,y=225)
 
 main_menu.pack(fill='both', expand=1)
 
-label2 = Label(stats, text="in stats", foreground="blue")
-label2.pack(side=LEFT)
+label2 = Label(stats, text="Daily Goal: 8 glasses of water", bg="white", font=('Arial', 16, 'bold'), padx=1)
+label2.pack(side=TOP, anchor=NW)
 
 label3 = Label(settings, text="in settings")
 label3.pack(side=LEFT)
