@@ -46,6 +46,9 @@ daily_count = 0
 global allDrinkEntries
 allDrinkEntries = []
 
+global list_of_badges
+list_of_badges = []
+
 
 bg = Image.open("background.png")
 bg = bg.resize((429,600), Resampling.LANCZOS)
@@ -95,6 +98,7 @@ def change_to_stats():
     stats.pack(fill='both', expand=1)
     main_menu.pack_forget()
     settings.pack_forget()
+    list_badges()
 
 def change_to_settings():
     settings.pack(fill='both', expand=1)
@@ -188,6 +192,80 @@ label2.pack(side=TOP, anchor=NW)
 
 label3 = Label(settings, text="in settings")
 label3.pack(side=LEFT)
+
+def list_badges():
+    global list_of_badges
+    for badge in list_of_badges:
+        badge.destroy()
+    badges_label = Label(stats, text="Achievements", bg="white", font=('Arial', 16, 'bold'))
+    list_of_badges.append(badges_label)
+    badges_label.place(x=0,y=200)
+
+    if num_bottles >= 1:
+        bottle_1 = Image.open("badge1.png")
+    else:
+        bottle_1 = Image.open("badge1.png")
+    bottle_1 = bottle_1.resize((100, 100), Resampling.LANCZOS)
+    bottle_1 = ImageTk.PhotoImage(bottle_1)
+    bottle_1_label = Label(stats, image=bottle_1, bg="white")
+    bottle_1_label.image = bottle_1
+    bottle_1_label.place(x=15,y=245)
+    label_image.append(bottle_1_label)
+
+    if num_bottles >= 10:
+        bottle_10 = Image.open("badge1.png")
+    else:
+        bottle_10 = Image.open("badge1.png")
+    bottle_10 = bottle_10.resize((100, 100), Resampling.LANCZOS)
+    bottle_10 = ImageTk.PhotoImage(bottle_10)
+    bottle_10_label = Label(stats, image=bottle_10, bg="white")
+    bottle_10_label.image = bottle_10
+    bottle_10_label.place(x=165,y=245)
+    label_image.append(bottle_10_label)
+
+    if num_bottles >= 50:
+        bottle_50 = Image.open("badge1.png")
+    else:
+        bottle_50 = Image.open("badge1.png")
+    bottle_50 = bottle_50.resize((100, 100), Resampling.LANCZOS)
+    bottle_50 = ImageTk.PhotoImage(bottle_50)
+    bottle_50_label = Label(stats, image=bottle_50, bg="white")
+    bottle_50_label.image = bottle_50
+    bottle_50_label.place(x=310,y=245)
+    label_image.append(bottle_50_label)
+
+    if num_bottles >= 100:
+        bottle_100 = Image.open("badge1.png")
+    else:
+        bottle_100 = Image.open("badge1.png")
+    bottle_100 = bottle_100.resize((100, 100), Resampling.LANCZOS)
+    bottle_100 = ImageTk.PhotoImage(bottle_100)
+    bottle_100_label = Label(stats, image=bottle_100, bg="white")
+    bottle_100_label.image = bottle_100
+    bottle_100_label.place(x=15,y=370)
+    label_image.append(bottle_100_label)
+
+    if num_bottles >= 24:
+        one_pound_plastic = Image.open("badge1.png")
+    else:
+        one_pound_plastic = Image.open("badge1.png")
+    one_pound_plastic = one_pound_plastic.resize((100, 100), Resampling.LANCZOS)
+    one_pound_plastic = ImageTk.PhotoImage(one_pound_plastic)
+    one_pound_plastic_label = Label(stats, image=one_pound_plastic, bg="white")
+    one_pound_plastic_label.image = one_pound_plastic
+    one_pound_plastic_label.place(x=165,y=370)
+    label_image.append(one_pound_plastic_label)
+
+    if num_bottles >= 120:
+        five_pounds_plastic = Image.open("badge1.png")
+    else:
+        five_pounds_plastic = Image.open("badge1.png")
+    five_pounds_plastic = five_pounds_plastic.resize((100, 100), Resampling.LANCZOS)
+    five_pounds_plastic = ImageTk.PhotoImage(five_pounds_plastic)
+    five_pounds_plastic_label = Label(stats, image=five_pounds_plastic, bg="white")
+    five_pounds_plastic_label.image = five_pounds_plastic
+    five_pounds_plastic_label.place(x=310,y=370)
+    label_image.append(five_pounds_plastic_label)
 
 
 # Add a button to switch between two frames
