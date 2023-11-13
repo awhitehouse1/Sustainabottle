@@ -1,5 +1,5 @@
 # Water_App
-Created by: Hayley Davis, Brooke Hewitt, and Ashley Davis
+Created by: Hayley Davis, Brooke Hewitt, and Ashley Whitehouse
 
 SustainaBottle accepts input from the user in how many oz, mL, or L of water they have consumed since their last entry in the app, and the app keeps track of this information. In the Main Menu, the number of plastic water bottles you saved in total is shown, so that you can see the positive environmental impact that you, personally, are having on the world.
 
